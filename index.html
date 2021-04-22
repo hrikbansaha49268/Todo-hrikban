@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title%}Home{% endblock title %}
+{% block body %}
+<!-- For adding todos -->
+<div class="container mt-4">
+    <h2 class="my-2">Add Your Todos</h2>
+    <form action="/" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Todo Title</label>
+            <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" />
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">Todo Description</label>
+            <input type="text" name="desc" class="form-control" id="desc" />
+        </div>
+        <div class="d-grid gap-5">
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </div>
+    </form>
+</div>
+<!-- For adding todos -->
+<!-- For showing todo list -->
+<div class="container">
+    <h2 class="my-3">Your Todos</h2>
+    <table class="table">
+        <tbody>
+            {% if allTodo|length==0 %}
+
+            <div class="alert alert-dark" role="alert">
+                No records. Please Fill up to organize your life!
+            </div>
+
+            {% else %}
+            <thead>
+                <tr>
+                    <th scope="col">SNO</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+
+            {% for todo in allTodo %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
+                <td>{{todo.date_created}}</td>
+                <td>
+                    <a type="button" href="/update/{{todo.sno}}"
+                        class="btn btn-sm btn-outline-dark mx-2 my-2">Update</button>
+                        <a type="button" href="/completed/{{todo.sno}}"
+                            class="btn btn-sm btn-outline-dark mx-2 my-2">Completed</button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+<!-- For showing todo list -->
+{% endblock body %}

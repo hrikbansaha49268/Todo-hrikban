@@ -1,0 +1,25 @@
+<!-- @format -->
+
+{% extends 'base.html' %}
+{% block title%}Update{% endblock title %}
+{% block body%}
+<!-- Update todo input -->
+<div class="container mt-4">
+    <h2 class="my-2">Update Your Todos</h2>
+    <form action="/update/{{todo.sno}}" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Todo Title</label>
+            <input type="text" class="form-control" name="title" value={{todo.title}} id="title"
+                aria-describedby="emailHelp" />
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">Todo Description</label>
+            <input type="text" name="desc" value={{todo.desc}} class="form-control" id="desc" />
+        </div>
+        <div class="d-grid gap-5">
+            <button type="submit" class="btn btn-outline-dark">Update</button>
+        </div>
+    </form>
+</div>
+<!-- Update todo input -->
+{% endblock body %}
